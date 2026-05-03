@@ -6,6 +6,7 @@
 
 #include "common/checksum.h"
 
+#include "common/checksum_rust.h"
 #include "common/types/types.h"
 
 namespace kuzu::common {
@@ -71,6 +72,9 @@ hash_t checksumRemainder(void* ptr, size_t len) noexcept {
 }
 
 uint64_t checksum(uint8_t* buffer, size_t size) {
+#ifdef KUZU_RUST_COMMON_CHECKSUM
+    return kudzu_common_checksum({buffer, size});
+#else
     uint64_t result = 5381;
     uint64_t* ptr = reinterpret_cast<uint64_t*>(buffer);
     size_t i{};
@@ -83,6 +87,7 @@ uint64_t checksum(uint8_t* buffer, size_t size) {
         result ^= checksumRemainder(buffer + i * 8, size - i * 8);
     }
     return result;
+#endif
 }
 
 } // namespace kuzu::common

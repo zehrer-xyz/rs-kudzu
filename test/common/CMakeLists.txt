@@ -1,4 +1,5 @@
 add_kuzu_test(types_test
+        checksum_test.cpp
         int128_test.cpp
         uint128_test.cpp
         date_test.cpp

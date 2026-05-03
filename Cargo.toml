@@ -1,0 +1,21 @@
+[workspace]
+members = [
+    "rust/kudzu-ffi-support",
+    "rust/kudzu-common",
+    "rust/kudzu-storage",
+    "rust/kudzu-transaction",
+    "rust/kudzu-catalog",
+    "rust/kudzu-parser",
+    "rust/kudzu-binder",
+    "rust/kudzu-planner",
+    "rust/kudzu-processor",
+    "rust/kudzu-main",
+    "rust/kudzu-extension",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+rust-version = "1.81"
+

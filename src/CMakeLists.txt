@@ -42,6 +42,13 @@ target_link_libraries(kuzu PUBLIC ${KUZU_LIBRARIES})
 target_link_libraries(kuzu_shared PUBLIC ${KUZU_LIBRARIES})
 unset(KUZU_LIBRARIES)
 
+if(TARGET kudzu_common_rust)
+        add_dependencies(kuzu kudzu_common_rust_build)
+        add_dependencies(kuzu_shared kudzu_common_rust_build)
+        target_link_libraries(kuzu PUBLIC kudzu_common_rust)
+        target_link_libraries(kuzu_shared PUBLIC kudzu_common_rust)
+endif()
+
 set(KUZU_INCLUDES $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}> ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/include/c_api)
 target_include_directories(kuzu PUBLIC ${KUZU_INCLUDES})
 target_include_directories(kuzu_shared PUBLIC ${KUZU_INCLUDES})
